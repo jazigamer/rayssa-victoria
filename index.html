@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Você, Exatamente Como Você É</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --color-soft-purple: #9370DB;
+            --color-deep-purple: #6A5ACD;
+            --color-warm-pink: #DDA0DD;
+            --color-soft-black: #2C2C2C;
+            --color-gentle-red: #FF6B8B;
+            --color-text: #F8F8FF;
+            --color-card: rgba(44, 44, 44, 0.9);
+        }
+
+        body {
+            background: linear-gradient(135deg, #2C2C2C 0%, #4A235A 100%);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* Header suave e acolhedor */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(44, 44, 44, 0.85);
+            border-radius: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(147, 112, 219, 0.2);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-soft-purple);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(147, 112, 219, 0.1) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--color-text);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+            text-shadow: 0 0 10px rgba(147, 112, 219, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--color-warm-pink);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            max-width: 100%;
+            margin: 0 auto 25px;
+            position: relative;
+            z-index: 1;
+            background: rgba(107, 70, 143, 0.2);
+            padding: 15px;
+            border-radius: 15px;
+            border-left: 3px solid var(--color-gentle-red);
+        }
+
+        /* Seções com design suave */
+        .section {
+            background: var(--color-card);
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(147, 112, 219, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        h2 {
+            color: var(--color-warm-pink);
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 300;
+        }
+
+        h2 i {
+            color: var(--color-gentle-red);
+        }
+
+        /* Área de mensagens especiais */
+        .message-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .message-block {
+            background: rgba(107, 70, 143, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            border-left: 4px solid var(--color-soft-purple);
+            transition: all 0.3s ease;
+        }
+
+        .message-block:hover {
+            transform: translateX(5px);
+            background: rgba(107, 70, 143, 0.3);
+        }
+
+        .original-message {
+            font-style: italic;
+            color: var(--color-warm-pink);
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(44, 44, 44, 0.7);
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .original-message::before {
+            content: '"';
+            font-size: 2rem;
+            color: var(--color-gentle-red);
+            position: absolute;
+            left: 5px;
+            top: -5px;
+        }
+
+        .response {
+            padding: 15px;
+            background: rgba(255, 107, 139, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid var(--color-gentle-red);
+        }
+
+        .response-title {
+            color: var(--color-gentle-red);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Área de reflexão */
+        .reflection-area {
+            background: rgba(107, 70, 143, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            border: 1px dashed var(--color-soft-purple);
+        }
+
+        .reflection-title {
+            color: var(--color-warm-pink);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* Galeria de afirmações */
+        .affirmations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .affirmation-card {
+            background: rgba(147, 112, 219, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .affirmation-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-warm-pink);
+            background: rgba(147, 112, 219, 0.25);
+        }
+
+        .affirmation-card i {
+            font-size: 2rem;
+            color: var(--color-gentle-red);
+            margin-bottom: 10px;
+        }
+
+        /* Footer especial */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--color-text);
+            font-size: 1.1rem;
+            background: rgba(44, 44, 44, 0.8);
+            border-radius: 20px;
+            margin-top: 20px;
+            border-top: 1px solid var(--color-soft-purple);
+        }
+
+        .heart {
+            color: var(--color-gentle-red);
+            animation: pulse 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Botão flutuante */
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--color-soft-purple);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .floating-btn:hover {
+            background: var(--color-gentle-red);
+            transform: scale(1.1);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Efeitos de entrada */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Melhorias para mobile */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .affirmations {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 20px 15px;
+            }
+        }
+
+        /* Mensagem especial */
+        .special-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(44, 44, 44, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            text-align: center;
+            max-width: 80%;
+            display: none;
+            border: 2px solid var(--color-soft-purple);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-soft-purple);
+        }
+    </style>
+</head>
+<body>
+    <!-- Mensagem especial -->
+    <div class="special-message" id="specialMessage">
+        <span class="close-btn" id="closeMessage">&times;</span>
+        <h3>Para Você...</h3>
+        <p>Lembre-se: ser autêntica não é um defeito, é sua maior qualidade. Continue sendo essa pessoa maravilhosa que você é!</p>
+        <i class="fas fa-heart" style="color: #FF6B8B; font-size: 2rem; margin-top: 15px;"></i>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>Para Você, Exatamente Como Você É</h1>
+            <p class="subtitle">Um espaço para lembrar que sua autenticidade é seu maior presente</p>
+            <p class="intro">Estas palavras foram reunidas com carinho para celebrar quem você é - com toda a sua intensidade, sensibilidade e beleza única.</p>
+        </header>
+
+        <section class="section hidden">
+            <h2><i class="fas fa-comments"></i> Palavras que Merecem Resposta</h2>
+            <div class="message-area">
+                <div class="message-block">
+                    <div class="original-message">
+                        "tu sempre foi assim, certinha demais, por isso se machuca"
+                    </div>
+                    <div class="response">
+                        <div class="response-title"><i class="fas fa-hand-holding-heart"></i> Sobre ser "certinha demais"</div>
+                        <p>Ser cuidadosa, ética e verdadeira não é uma fraqueza - é uma força. O mundo precisa de mais pessoas como você, que se importam genuinamente. A dor que você sente às vezes vem justamente porque você se importa, e isso é lindo.</p>
+                    </div>
+                </div>
+
+                <div class="message-block">
+                    <div class="original-message">
+                        "já conheci muitas pessoas como tu, ama demais, se entrega demais e no fim, sofre"
+                    </div>
+                    <div class="response">
+                        <div class="response-title"><i class="fas fa-heart"></i> Sobre amar "demais"</div>
+                        <p>Amar com intensidade é um dom, não um defeito. Pessoas como você tornam o mundo mais bonito. O que precisa mudar não é sua capacidade de amar, mas aprender a direcionar parte desse amor para você mesma também.</p>
+                    </div>
+                </div>
+
+                <div class="message-block">
+                    <div class="original-message">
+                        "tu não precisa fingir ser. sendo tu mesma, eu te conheço desde o jardim de infância, nunca precisou se esforçar pra ser legal"
+                    </div>
+                    <div class="response">
+                        <div class="response-title"><i class="fas fa-star"></i> Sobre ser autêntica</div>
+                        <p>Que presente ouvir isso de alguém que te conhece há tanto tempo! Sua essência já é completa e suficiente. Você não precisa performar ou se moldar para ser amada - quem você é naturalmente já é mais que suficiente.</p>
+                    </div>
+                </div>
+
+                <div class="message-block">
+                    <div class="original-message">
+                        "tu é uma menina incrível, mas com isso, acaba se cobrando muito"
+                    </div>
+                    <div class="response">
+                        <div class="response-title"><i class="fas fa-feather"></i> Sobre a autocobrança</div>
+                        <p>É verdade que pessoas especiais tendem a ser mais exigentes consigo mesmas. Mas lembre-se: perfeição não existe. Permitir-se ser humana, com altos e baixos, é um ato de amor próprio. Você já é incrível - não precisa provar isso para ninguém.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reflection-area">
+                <div class="reflection-title">Um momento para respirar...</div>
+                <p>Estas palavras dizem mais sobre sua beleza interior do que sobre qualquer "defeito". Sua sensibilidade é um dom, não um fardo.</p>
+            </div>
+        </section>
+
+        <section class="section hidden">
+            <h2><i class="fas fa-seedling"></i> Afirmações para Sua Alma</h2>
+            <div class="affirmations">
+                <div class="affirmation-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Minha sensibilidade é minha força</h3>
+                    <p>Permito-me sentir profundamente, pois isso me conecta com o mundo de maneira única.</p>
+                </div>
+                <div class="affirmation-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Mereço amor sem condições</h3>
+                    <p>Não preciso me modificar ou me esforçar para ser digna de amor e respeito.</p>
+                </div>
+                <div class="affirmation-card">
+                    <i class="fas fa-compass"></i>
+                    <h3>Minha autenticidade é meu guia</h3>
+                    <p>Confio na pessoa que sou e honro minha verdade interior.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section hidden">
+            <h2><i class="fas fa-music"></i> Sons para Acender a Alma</h2>
+            <div style="text-align: center; margin: 20px 0;">
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Alok-Zeeba-and-IRO-Ocean-Official-Music-Video.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--iñigo-quintero-Si-No-Estás-Letra-Oficial.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Luan-Santana-Dia-lugar-e-hora-Novo-DVD-1977.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Daniel-Trem-Bala-part-Larissa-Manoela-Clipe-Oficial.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Henrique-e-Juliano-SEU-PERFIL-DVD-Manifesto-Musical.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Henrique-e-Juliano-U-LTIMA-SAUDADE-Manifesto-Musical-2.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Melim-Meu-Abrigo.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Maria-Marçal-Deserto.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Anderson-Freire-Raridade-Ao-Vivo.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Isadora-Pompeo-Bênçãos-Que-Não-Têm-Fim-Counting-My.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Jessé-Aguiar-Alívio-Clipe-Oficial.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Nathália-Braga-Deus-Está-Te-Ensinando-Clipe-Oficial.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--Raphaela-Santos-Água-com-Açúcar-Chama-no-Bregão.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <audio controls style="width: 100%; max-width: 400px; border-radius: 20px;">
+                    <source src="./SSvid.net--TÁ-CHORANDO-POR-QUÊ-Jeyzer-Maia-Cover-Preto-no.mp3" type="audio/mp3">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+            </div>
+            <p style="text-align: center; font-style: italic; margin-top: 15px;">Uma melodia suave para acompanhar este momento de reflexão</p>
+        </section>
+
+        <footer>
+            <p>Com todo o carinho, para lembrar que ser você mesma já é mais que suficiente.</p>
+            <p style="margin-top: 10px;">Feito com <span class="heart">❤</span> para celebrar sua essência única</p>
+        </footer>
+    </div>
+
+    <!-- Botão flutuante -->
+    <div class="floating-btn" id="floatingBtn">
+        <i class="fas fa-gem"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efeito de digitação no título
+            const title = document.querySelector('h1');
+            const originalText = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            setTimeout(typeWriter, 500);
+            
+            // Revelação suave das seções
+            const sections = document.querySelectorAll('.section');
+            
+            const revealSection = function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+            
+            const sectionObserver = new IntersectionObserver(revealSection, {
+                root: null,
+                threshold: 0.1,
+            });
+            
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+            
+            // Botão flutuante - mensagem especial
+            const floatingBtn = document.getElementById('floatingBtn');
+            const specialMessage = document.getElementById('specialMessage');
+            const closeMessage = document.getElementById('closeMessage');
+            
+            floatingBtn.addEventListener('click', function() {
+                specialMessage.style.display = 'block';
+            });
+            
+            closeMessage.addEventListener('click', function() {
+                specialMessage.style.display = 'none';
+            });
+            
+            // Fechar mensagem ao clicar fora
+            window.addEventListener('click', function(event) {
+                if (event.target === specialMessage) {
+                    specialMessage.style.display = 'none';
+                }
+            });
+            
+            // Efeito de destaque nas mensagens ao passar o mouse
+            const messageBlocks = document.querySelectorAll('.message-block');
+            messageBlocks.forEach(block => {
+                block.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(10px)';
+                });
+                
+                block.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
